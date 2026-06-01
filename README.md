@@ -168,7 +168,7 @@ git clone https://huggingface.co/
 This project is licensed under the MIT License - see the [LICENSE](https://github.com/) file for details.
 
 
-## Codebases & Related Papers
+
 ## MSCOCO & Flickr30k
 
 This project supports **text-to-image retrieval** on both **MSCOCO** and **Flickr30k**.
