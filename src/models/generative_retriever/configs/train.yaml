@@ -1,0 +1,77 @@
+seed: 2026
+
+# -------------------------
+# codebook
+# -------------------------
+codebook_vocab: 4096
+codebook_level_total: 9
+codebook_level_wo_modality: 8
+modality_index: true
+
+# -------------------------
+# paths (RELATIVE ONLY)
+# -------------------------
+rq_yaml: dig/src/models/residual_quantization/configs_scripts/train_rq.yaml
+train_jsonl: M-BEIR/query/union_train/mbeir_union_up_train.jsonl
+query_store: dig/embed/lamra/train/mbeir_union_train_query_dict.pt
+cand_store: dig/embed/lamra/train/mbeir_union_train_cand_pool_dict.pt
+rq_ckpt: dig/checkpoints/RQ/${codebook_level_wo_modality}x${codebook_vocab}/ckpt_last.pt
+
+# out_dir will be injected by bash
+out_dir: PLACEHOLDER_OUT
+
+# -------------------------
+# model
+# -------------------------
+t5_name: google-t5/t5-small
+num_prefix: 30
+alpha: 2.0
+
+# -------------------------
+# training
+# -------------------------
+train_bs: 256
+invariant_train_bs: 512
+num_workers: 8
+
+use_invariant_pretrain: true
+invariant_pretrain_epochs: 10
+invariant_lr: 2e-4
+invariant_wd: 1e-4
+invariant_tau: 0.01
+lambda_invariant: 1.0
+lambda_invariant_kd: 1.0
+invariant_kd_margin: 0.1
+
+t5_epochs: 30
+lr: 1e-4
+weight_decay: 1e-4
+warmup_steps: 500
+max_grad_norm: 1.0
+
+lambda_rank: 1.0
+teacher_margin_scale: 1.0
+teacher_margin_min: 0.0
+mask_modality_pos0: 1
+
+print_freq: 100
+save_every: 5
+save_tokenizer_every_ckpt: false
+
+# -------------------------
+# Experiment naming (for W&B)
+# -------------------------
+experiment:
+  instruct_status: "instruct "
+  description: "${experiment.instruct_status}"
+
+model:
+  name: "T5"
+  size: "${t5_name}"
+
+wandb_config:
+  enabled: true
+  wandb_project: "DiG4UMR"
+  experiment_name: "${model.name} ${model.size} ${experiment.description} rq_${codebook_level_wo_modality}x${codebook_vocab}"
+  wandb_key: "50995eb09ac26de74b2fc2d5ee9e31fe5e7bac48"
+  notes: "Stage1 invariant pretrain + Stage2 T5 training"

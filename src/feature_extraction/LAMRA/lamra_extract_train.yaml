@@ -1,0 +1,15 @@
+# configs/lamra_extract_train.yaml
+seed: 2026
+
+data_config:
+
+  # Instruction control
+  enable_query_instruct: true
+  query_instruct_path: instructions/query_instructions.tsv
+
+  # For deterministic selection of positive cand (only used if enable_query_instruct=true)
+  shuffle_cand: false
+
+dataloader_config:
+  train_batch_size: 4
+  num_workers: 8

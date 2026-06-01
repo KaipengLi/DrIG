@@ -1,0 +1,69 @@
+# eval/configs/eval_flickr.yaml
+
+# =========================
+# Runtime
+# =========================
+nproc: 4
+master_port: 29700
+cuda_visible_devices: "0,1,2,3"
+torch_cpp_log_level: "ERROR"
+eval_module: "eval.eval"
+
+# =========================
+# Roots
+# =========================
+# mbeir_data_dir: "." 会被 run_eval_flickr30k.sh 转成绝对路径
+# 指向 /data/likaipeng/Flickr30k（qrels/query jsonl 在这下面）
+mbeir_data_dir: "."
+# embed_root 指向 flickr30k embedding 目录
+embed_root: "embed/lamra/flickr/test"
+save_dir: "eval_outputs_flickr30k"
+
+# =========================
+# Checkpoints
+# =========================
+t5_ckpts:
+  - "checkpoints/DiG4UMR/flickr30k/t5_small/8x4096/finetune_t5_epoch_030.pt"
+rq_ckpt: "checkpoints/RQ/flickr/8x4096/ckpt_last.pt"
+rq_yaml: "models/residual_quantization/configs_scripts/train_rq.yaml"
+
+# =========================
+# eval.py args
+# =========================
+t5_name: "google-t5/t5-small"
+num_beams: "50"
+batch_size: 32
+num_workers: 4
+
+use_fp16: true
+use_trie: true
+
+rebuild_cand_codes: true
+cand_code_prefix: "auto"
+
+guide_topk_list: "1000"
+guidance_scale: 1.0
+disable_guidance: false
+sq_tau: 0.05
+
+metrics: "Recall@1,Recall@5,Recall@10"
+out_tsv: "flickr30k_recall_results.tsv"
+
+# =========================
+# Rerank options
+# =========================
+rerank: true
+rerank_k: "50" #3,5,10,15,20,25,30,35,40,45,50
+rerank_sources: "lamra" # "lamra,clip_sf"
+report_base_and_rerank: true   #
+external_rerank_dir: /data/likaipeng/dig/embed/CLIP_SF/query_and_cand
+external_use_union_cand: false #false
+
+# =========================
+# Union candidate store (only used when use_union_cand: true)
+# =========================
+use_union_cand: false
+union_cand_store: "embed/lamra/cand/mbeir_union_cand_pool_dict.pt"
+
+tasks:
+  - "flickr30k_task0"

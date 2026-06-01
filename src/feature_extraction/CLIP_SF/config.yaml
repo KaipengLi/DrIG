@@ -1,0 +1,146 @@
+# config.yaml
+seed: 2023
+
+# -------------------------
+# Experiment
+# -------------------------
+experiment:
+  exp_name: InBatch
+  instruct_status: Instruct
+  path_suffix: CLIP
+  description: ${model.name} ${model.size} ${experiment.instruct_status} ${experiment.exp_name}
+
+# -------------------------
+# Data
+# -------------------------
+data_config:
+  # directory names under mbeir_data_dir
+  train_dir_name: query/train
+  val_dir_name: query/val
+  test_dir_name: query/test
+  cand_pool_dir_name: cand_pool/local
+
+  # instructions
+  enable_query_instruct: true
+  query_instruct_path: instructions/query_instructions.tsv
+  shuffle_cand: true
+
+  # collator image size (your code parses: tuple(map(int, image_size.split(","))))
+  image_size: "224, 224"
+
+  # not used here but keep
+  in_batch_neg_num: 0
+
+# -------------------------
+# Dataloader
+# -------------------------
+dataloader_config:
+  batch_size: 4
+  num_workers: 8
+
+# -------------------------
+# Distributed
+# -------------------------
+dist_config:
+  dist_url: env://
+
+# -------------------------
+# Embedding generation switches
+# -------------------------
+embed_config:
+  embed_dir_name: embed
+  use_fp16: true
+
+  # ---- Generate TEST query embeddings for ALL tasks ----
+  test_datasets_config:
+    enable_embed: true
+    datasets_name:
+      - visualnews_task0
+      - mscoco_task0
+      - fashion200k_task0
+      - webqa_task1
+      - edis_task2
+      - webqa_task2
+      - visualnews_task3
+      - mscoco_task3
+      - fashion200k_task3
+      - nights_task4
+      - oven_task6
+      - infoseek_task6
+      - fashioniq_task7
+      - cirr_task7
+      - oven_task8
+      - infoseek_task8
+    correspond_cand_pools_name:
+      - visualnews_task0
+      - mscoco_task0_test
+      - fashion200k_task0
+      - webqa_task1
+      - edis_task2
+      - webqa_task2
+      - visualnews_task3
+      - mscoco_task3_test
+      - fashion200k_task3
+      - nights_task4
+      - oven_task6
+      - infoseek_task6
+      - fashioniq_task7
+      - cirr_task7
+      - oven_task8
+      - infoseek_task8
+
+  # ---- (Optional) turn off train/val embedding to save time ----
+  train_datasets_config:
+    enable_embed: false
+    datasets_name: []
+    correspond_cand_pools_name: []
+
+  val_datasets_config:
+    enable_embed: false
+    datasets_name: []
+    correspond_cand_pools_name: []
+
+  # ---- Generate candidate pool embeddings for ALL tasks ----
+  cand_pools_config:
+    enable_embed: true
+    cand_pools_name_to_embed:
+      - visualnews_task0
+      - mscoco_task0_test
+      - fashion200k_task0
+      - webqa_task1
+      - edis_task2
+      - webqa_task2
+      - visualnews_task3
+      - mscoco_task3_test
+      - fashion200k_task3
+      - nights_task4
+      - oven_task6
+      - infoseek_task6
+      - fashioniq_task7
+      - cirr_task7
+      - oven_task8
+      - infoseek_task8
+    embed_union_pool: true
+
+# -------------------------
+# Model
+# -------------------------
+model:
+  name: CLIPScoreFusion
+  short_name: CLIP_SF
+  size: Large
+
+  # CLIP backbone
+  clip_vision_model_name: ViT-L/14
+  pretrained_clip_model_dir: checkpoints/CLIP/
+
+  # Load your CLIP-SF checkpoint
+  ckpt_config:
+    ckpt_dir: checkpoints/CLIP_SF
+    ckpt_name: clip_sf_large.pth
+    using_pretrained: true
+
+  # Where to save embeddings (relative to genir_dir)
+  # Your code: save_embed_path = os.path.join(config.genir_dir, config.model.emb_save_path)
+  emb_save_path: /data/likaipeng/dig/embed/CLIP_SF/query_and_cand
+  gather_embeddings: true

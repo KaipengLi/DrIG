@@ -1,0 +1,75 @@
+seed: 2026
+
+rq_config:
+  emb_dim: 3584
+  codebook_vocab: 4096
+  codebook_level: 8
+  modality_index: true
+  normalize_before_rq: true
+  rq_loss_weight: 100.0
+  mse_loss_weight: 100.0
+#  use_emb_encoder: true
+  rq_mode: "encoder_ema"  #encoder_ema,no_encoder_learnable", "pure_ema"    #notice this will affect the naming of checkpoints and W&B experiment
+  temperature: 0.01
+  use_modality_cond: false
+  modality_scale: 0.1
+  return_codes: true
+
+paths:
+  # relative to genir_dir by default (for embeddings / ckpts / logs)
+  query_emb_pt: embed/lamra/flickr/train/mbeir_flickr30k_train_query_dict.pt
+  pool_emb_pt:  embed/lamra/flickr/train/mbeir_flickr30k_train_cand_pool_dict.pt
+  output_dir: checkpoints/RQ/${rq_config.codebook_level}x${rq_config.codebook_vocab}/
+
+  # relative to mbeir_data_dir by default (for dataset jsonl)
+  query_jsonl:  Flickr30k/query/train/mbeir_flickr30k_task0_train.jsonl
+
+
+
+optim:
+  lr: 1.0e-4
+  weight_decay: 0.01
+  betas: [0.9, 0.98]
+  eps: 1.0e-8
+
+train:
+  epochs: 20
+  batch_size: 2000
+  grad_accum: 1
+  amp: bf16
+  log_every: 50
+  save_every_steps: 2000
+  print_codes_every: 200
+  print_codes_samples: 1
+
+dataloader:
+  num_workers: 8
+  pin_memory: true
+  drop_last: true
+
+dist:
+  backend: nccl
+  dist_url: env://
+
+data:
+  neg_k: 0
+  expand_multi_pos: false
+
+# Experiment configuration
+experiment:
+  instruct_status: "instruct Flickr30k"
+  description: "${experiment.instruct_status}"
+
+# Model configuration (optional; just for naming)
+model:
+  name: "ResidualQuantizer"
+  size: "${rq_config.codebook_level}x${rq_config.codebook_vocab}"
+
+# Weights & Biases configuration
+wandb_config:
+  enabled: true
+  experiment_name: "${model.name} ${model.size} ${experiment.description} ${rq_config.rq_mode}"
+  wandb_project: "DiG4UMR"
+
+  # You want key in YAML (WARNING: do not commit)
+  wandb_key: "50995eb09ac26de74b2fc2d5ee9e31fe5e7bac48"
