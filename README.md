@@ -154,7 +154,7 @@ git clone https://huggingface.co/
 ### Each Component Checkpoints
 - **CLIP-SF Model** (Stage 0): [`clip_sf_large.pth`](https://huggingface.co/TIGER-Lab/UniIR/blob/main/checkpoint/CLIP_SF/clip_sf_large.pth)
 - **Residual Quantization Model** (Stage 1): [`rq_clip_large.pth`](https://huggingface.co/)
-- **Generator Model** (Stage 2): [`DiG4UMR_t5small.pth`](https://huggingface.co/)
+- **Generator Model** (Stage 2): [`DrIG_t5small.pth`]([https://huggingface.co/](https://huggingface.co/KaiPengLi/DrIG))
 
 > Note: All three models are required for full functionality. 
 
