@@ -15,7 +15,7 @@
 
 DrIG is a generative universal multimodal retrieval framework that learns **dual-role identifiers** for unified retrieval across heterogeneous multimodal tasks.
 
-## Overview
+## 🔎 Overview
 
 DrIG follows a three-stage pipeline:
 
@@ -30,7 +30,7 @@ DrIG follows a three-stage pipeline:
 
 The repository contains code for M-BEIR experiments, MSCOCO/Flickr30k text-to-image retrieval, residual quantization, generator training, and evaluation.
 
-## Installation
+## ⚙️ Installation
 
 Clone this repository and create the Conda environment:
 
@@ -43,7 +43,7 @@ conda activate dig
 
 The environment uses Python 3.10 and PyTorch 2.5.1. Git LFS is also included for downloading large model and dataset files.
 
-## Dataset
+## 📚 Dataset
 
 ### M-BEIR
 
@@ -75,9 +75,9 @@ cd src/data
 bash preprocessing/coco_flickr/run_flickr_mscoco_task0_pipeline.sh
 ```
 
-## Model Checkpoints
+## 🤗 Model Checkpoints
 
-### LamRA-Ret
+### 🔗 LamRA-Ret
 
 We use LamRA-Ret for encoder-side multimodal feature extraction.
 
@@ -85,7 +85,7 @@ We use LamRA-Ret for encoder-side multimodal feature extraction.
 https://huggingface.co/code-kunkun/LamRA-Ret
 ```
 
-### DrIG Checkpoints
+### 📦 DrIG Checkpoints
 
 We provide DrIG checkpoints on Hugging Face:
 
@@ -119,7 +119,7 @@ Checkpoint links:
 
 For full inference, use LamRA-Ret, `rq_lamra.pt`, and one generative retriever checkpoint.
 
-## Usage
+## 🚀 Usage
 
 ### Stage 0: Feature Extraction
 
@@ -183,7 +183,7 @@ cd src
 bash models/generative_retriever/configs/run_train_flickr.sh
 ```
 
-## Inference and Evaluation
+## 🔍 Inference and Evaluation
 
 ### Compile the C++ trie
 
@@ -216,7 +216,7 @@ cd src/eval/configs
 bash run_eval_flickr.sh
 ```
 
-## Repository Structure
+## 🗂️ Repository Structure
 
 ```text
 DrIG/
@@ -238,14 +238,14 @@ DrIG/
         └── uniir_clip/
 ```
 
-## Performance
+## 📈 Performance
 
 Detailed experimental results are reported in the paper, including the main M-BEIR benchmark results and additional text-to-image retrieval results on Flickr30k and MSCOCO.
 
-## Notes
+## 📝 Notes
 
 Some shell scripts contain machine-specific absolute paths. Before running experiments, update paths such as dataset roots, checkpoint roots, output directories, and CUDA device settings according to your local environment.
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
