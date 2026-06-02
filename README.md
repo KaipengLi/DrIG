@@ -8,7 +8,6 @@
 [![Python 3.10](https://img.shields.io/badge/Python-3.10-blue.svg)](drig_env.yml)
 [![PyTorch 2.5.1](https://img.shields.io/badge/PyTorch-2.5.1-ee4c2c.svg)](drig_env.yml)
 [![Dataset: M-BEIR](https://img.shields.io/badge/Dataset-M--BEIR-orange.svg)](https://huggingface.co/datasets/TIGER-Lab/M-BEIR)
-[![LamRA-Ret](https://img.shields.io/badge/Encoder-LamRA--Ret-yellow.svg)](https://huggingface.co/code-kunkun/LamRA-Ret)
 [![DrIG Checkpoints](https://img.shields.io/badge/Checkpoints-Hugging_Face-yellow.svg)](https://huggingface.co/KaiPengLi/DrIG/tree/main/checkpoints)
 
 </div>
