@@ -4,11 +4,11 @@
 
 **Generative Universal Multimodal Retrieval with Dual-role Identifiers**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?logo=opensourceinitiative&logoColor=white)](LICENSE)
-[![Python 3.10](https://img.shields.io/badge/Python-3.10-blue.svg?logo=python&logoColor=white)](drig_env.yml)
-[![PyTorch 2.5.1](https://img.shields.io/badge/PyTorch-2.5.1-ee4c2c.svg?logo=pytorch&logoColor=white)](drig_env.yml)
-[![Dataset: M-BEIR](https://img.shields.io/badge/Dataset-M--BEIR-orange.svg?logo=huggingface&logoColor=yellow)](https://huggingface.co/datasets/TIGER-Lab/M-BEIR)
-[![Checkpoints: DrIG](https://img.shields.io/badge/Checkpoints-DrIG-yellow.svg?logo=huggingface&logoColor=yellow)](https://huggingface.co/KaiPengLi/DrIG/tree/main/checkpoints)
+[![License: MIT](https://img.shields.io/badge/📄%20License-MIT-green)](LICENSE)
+[![Python 3.10](https://img.shields.io/badge/🐍%20Python-3.10-blue)](drig_env.yml)
+[![PyTorch 2.5.1](https://img.shields.io/badge/🔥%20PyTorch-2.5.1-ee4c2c)](drig_env.yml)
+[![Dataset: M-BEIR](https://img.shields.io/badge/🤗%20Dataset-M--BEIR-orange)](https://huggingface.co/datasets/TIGER-Lab/M-BEIR)
+[![Checkpoints: DrIG](https://img.shields.io/badge/🤗%20Checkpoint-DrIG-yellow)](https://huggingface.co/KaiPengLi/DrIG/tree/main/checkpoints)
 
 </div>
 
