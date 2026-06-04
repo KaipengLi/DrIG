@@ -109,11 +109,6 @@ wget https://huggingface.co/KaiPengLi/DrIG/resolve/main/checkpoints/rq_lamra.pt 
 wget https://huggingface.co/KaiPengLi/DrIG/resolve/main/checkpoints/DrIG_t5small.pt \
   -O checkpoints/DrIG/DrIG_t5small.pt
 
-wget https://huggingface.co/KaiPengLi/DrIG/resolve/main/checkpoints/DrIG_t5base.pt \
-  -O checkpoints/DrIG/DrIG_t5base.pt
-
-wget https://huggingface.co/KaiPengLi/DrIG/resolve/main/checkpoints/DrIG_t5large.pt \
-  -O checkpoints/DrIG/DrIG_t5large.pt
 ```
 
 Checkpoint links:
