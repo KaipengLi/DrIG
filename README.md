@@ -254,7 +254,7 @@ Detailed experimental results are reported in the paper. The tables below summar
 | Local-pool average | 51.3 | 47.9 | 58.1 | **63.7** | 29.5 | 38.0 | 37.6 | 48.7 | 50.4 |
 | Global-pool average | 48.6 | 45.7 | 56.3 | **61.4** | 28.6 | 36.4 | 37.8 | 47.1 | 48.9 |
 
-DrIG improves over the generative baseline GENIUS in both local-pool and global-pool retrieval. With LamRA-based reranking, DrIG-LT provides a stronger effectiveness-efficiency operating point.
+
 
 ### Text-to-Image Retrieval
 
