@@ -216,28 +216,6 @@ cd src/eval/configs
 bash run_eval_flickr.sh
 ```
 
-## 🗂️ Repository Structure
-
-```text
-DrIG/
-├── drig_env.yml
-├── LICENSE
-├── README.md
-└── src/
-    ├── collators/
-    ├── data/
-    │   └── preprocessing/
-    ├── eval/
-    │   └── configs/
-    ├── feature_extraction/
-    │   └── LAMRA/
-    └── models/
-        ├── generative_retriever/
-        ├── lamra/
-        ├── residual_quantization/
-        └── uniir_clip/
-```
-
 ## 📈 Performance
 
 Detailed experimental results are reported in the paper.
@@ -245,10 +223,26 @@ Detailed experimental results are reported in the paper.
 
 <div align="center">
 
-| Setting | CLIP-SF | BLIP-FF | LamRA-ret | LamRA | GENIUS | GENIUS-C | DrIG (Ours) | DrIG-C (Ours) | DrIG-LT (Ours) |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Local-pool average | 51.3 | 47.9 | 58.1 | 63.7 | 29.5 | 37.6 | **38.0** | **48.7** | **50.4** |
-| Global-pool average | 48.6 | 45.7 | 56.3 | 61.4 | 28.6 | 37.8 | **36.4** | **47.1** | **48.9** |
+| Task | Dataset | CLIP-SF | BLIP-FF | LamRA-ret | LamRA | GENIUS | DrIG | GENIUS-C | DrIG-C | DrIG-LT |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| $q_t \rightarrow c_i$ | VisualNews | 42.1 | 22.3 | 41.3 | **46.9** | 17.7 | 22.0 (+24.3%) | 26.1 | 33.8 (+29.5%) | **33.8 (+29.5%)** |
+| $q_t \rightarrow c_i$ | MSCOCO | 71.3 | 65.2 | 75.3 | **78.0** | 49.9 | 59.2 (+18.6%) | 62.8 | 70.6 (+12.4%) | **71.1 (+13.2%)** |
+| $q_t \rightarrow c_i$ | Fashion200K | 17.9 | 26.0 | 28.5 | **32.5** | 12.2 | 15.8 (+29.5%) | 14.2 | 19.3 (+35.9%) | **22.3 (+57.0%)** |
+| $q_t \rightarrow c_t$ | WebQA | 83.4 | 78.4 | 85.8 | **96.5** | 31.7 | 44.3 (+39.7%) | 43.0 | 64.3 (+49.5%) | **65.1 (+51.4%)** |
+| $q_t \rightarrow (c_i,c_t)$ | EDIS | 52.7 | 49.2 | 62.3 | **74.4** | 35.4 | 38.4 (+8.5%) | 43.1 | 49.8 (+15.5%) | **56.0 (+29.9%)** |
+| $q_t \rightarrow (c_i,c_t)$ | WebQA | 77.2 | 77.0 | 81.0 | **87.1** | 47.0 | 56.8 (+20.9%) | 57.5 | 68.5 (+19.1%) | **70.0 (+21.7%)** |
+| $q_i \rightarrow c_t$ | VisualNews | 38.7 | 21.0 | 39.3 | **47.6** | 17.7 | 21.1 (+19.2%) | 25.4 | **33.5 (+31.9%)** | 32.4 (+27.6%) |
+| $q_i \rightarrow c_t$ | MSCOCO | 91.3 | 89.7 | 90.4 | **92.4** | 81.5 | 84.5 (+3.7%) | 89.9 | **91.9 (+2.2%)** | 90.0 (+0.1%) |
+| $q_i \rightarrow c_t$ | Fashion200K | 18.0 | 27.2 | 30.4 | **36.6** | 11.7 | 18.0 (+53.8%) | 16.7 | 20.2 (+21.0%) | **24.5 (+46.7%)** |
+| $q_i \rightarrow c_i$ | NIGHTS | 30.9 | 31.6 | 32.1 | **34.2** | 9.5 | 17.7 (+86.3%) | 30.0 | 31.4 (+4.7%) | **31.8 (+6.0%)** |
+| $(q_i,q_t) \rightarrow c_t$ | OVEN | 39.5 | 39.4 | 48.4 | **54.0** | 34.0 | 40.4 (+18.8%) | 37.8 | 46.3 (+22.5%) | **47.1 (+24.6%)** |
+| $(q_i,q_t) \rightarrow c_t$ | InfoSeek | 22.1 | 19.7 | 48.7 | **58.7** | 9.9 | 22.2 (+124.2%) | 17.7 | 31.3 (+76.8%) | **40.3 (+127.7%)** |
+| $(q_i,q_t) \rightarrow c_i$ | FashionIQ | 24.4 | 28.8 | 33.1 | **37.4** | 12.8 | 19.1 (+49.2%) | 18.2 | 23.7 (+30.2%) | **26.3 (+44.5%)** |
+| $(q_i,q_t) \rightarrow c_i$ | CIRR | 43.1 | 48.1 | 50.5 | **59.7** | 21.1 | 31.0 (+46.9%) | 36.6 | 43.5 (+18.9%) | **45.4 (+24.0%)** |
+| $(q_i,q_t) \rightarrow (c_i,c_t)$ | OVEN | 59.7 | 55.8 | 70.0 | **72.6** | 36.8 | 47.0 (+27.7%) | 46.4 | 63.0 (+35.8%) | **63.7 (+37.3%)** |
+| $(q_i,q_t) \rightarrow (c_i,c_t)$ | InfoSeek | 44.1 | 26.1 | 60.0 | **74.0** | 12.4 | 25.3 (+104.0%) | 25.3 | 44.4 (+75.5%) | **47.8 (+88.9%)** |
+| **Average** | -- | 48.6 | 45.7 | 56.3 | **61.4** | 28.6 | 36.4 (+27.3%) | 37.8 | 47.1 (+24.6%) | **48.9 (+29.4%)** |
+
 
 </div>
 
