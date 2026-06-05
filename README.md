@@ -256,6 +256,7 @@ Detailed experimental results are reported in the paper. The tables below summar
 
 
 ### Text-to-Image Retrieval
+<div align="center">
 
 | Dataset | Method | Training Data | R@1 | R@5 | R@10 |
 | --- | --- | --- | ---: | ---: | ---: |
@@ -267,7 +268,7 @@ Detailed experimental results are reported in the paper. The tables below summar
 | MSCOCO | DrIG-LT | M-BEIR | 56.1 | 79.6 | 86.0 |
 | MSCOCO | DrIG | MSCOCO | 43.4 | 71.3 | 80.5 |
 | MSCOCO | DrIG-LT | MSCOCO | **56.3** | **80.1** | **86.7** |
-
+</div>
 † denotes zero-shot evaluation without task-specific fine-tuning.
 
 <p align="center">
